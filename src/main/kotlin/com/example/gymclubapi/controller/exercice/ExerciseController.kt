@@ -7,12 +7,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("exercises")
@@ -22,10 +17,16 @@ class ExerciseController(private val exerciseService: ExerciseService) {
         return exerciseService.getExercises(page)
     }
 
+    @GetMapping("/{id}")
+    fun findById(@PathVariable id: Long): Exercise? {
+        return exerciseService.getExercise(id)
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody() exerciseCreationDto: ExerciseCreationDto) {
-       exerciseCreationDto
+    fun create(@RequestBody exerciseCreationDto: ExerciseCreationDto): Long? {
+        val exercise = Exercise(exerciseCreationDto.name, exerciseCreationDto.description, exerciseCreationDto.category)
+        return exerciseService.addExercise(exercise)
     }
 
     @GetMapping("categories")

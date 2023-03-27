@@ -3,8 +3,9 @@ package com.example.gymclubapi.entity
 import jakarta.persistence.*
 
 
-enum class ExerciseCategory(
-)
+enum class ExerciseCategory{
+    Test
+}
 
 @Entity
 class Exercise(

@@ -9,5 +9,4 @@ class GymClubApiApplication
 
 fun main(args: Array<String>) {
     runApplication<GymClubApiApplication>(*args)
-    println("Tua prima")
 }

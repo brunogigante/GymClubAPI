@@ -1,7 +1,6 @@
 package com.example.gymclubapi.entity
 
 import jakarta.persistence.*
-import java.sql.Timestamp
 
 @Entity
 class TrainingSessionSet(
