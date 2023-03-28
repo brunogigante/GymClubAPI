@@ -1,4 +1,4 @@
-package com.example.gymclubapi.controller.exercice
+package com.example.gymclubapi.controller.exercise
 
 import com.example.gymclubapi.entity.Exercise
 import com.example.gymclubapi.entity.ExerciseCategory
@@ -25,8 +25,7 @@ class ExerciseController(private val exerciseService: ExerciseService) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody exerciseCreationDto: ExerciseCreationDto): Long? {
-        val exercise = Exercise(exerciseCreationDto.name, exerciseCreationDto.description, exerciseCreationDto.category)
-        return exerciseService.addExercise(exercise)
+        return exerciseService.addExercise(exerciseCreationDto)
     }
 
     @GetMapping("categories")

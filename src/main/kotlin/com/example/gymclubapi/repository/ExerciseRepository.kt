@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ExerciseRepository: JpaRepository<Exercise, Long> {
-    fun findExerciseByName(name: String?): Exercise?
+    fun findExerciseByName(name: String): Exercise?
 }

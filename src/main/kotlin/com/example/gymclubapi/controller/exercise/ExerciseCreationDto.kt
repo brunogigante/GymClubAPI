@@ -1,4 +1,4 @@
-package com.example.gymclubapi.controller.exercice
+package com.example.gymclubapi.controller.exercise
 
 import com.example.gymclubapi.entity.ExerciseCategory
 
