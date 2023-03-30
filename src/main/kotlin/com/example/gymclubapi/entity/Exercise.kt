@@ -4,7 +4,14 @@ import jakarta.persistence.*
 
 
 enum class ExerciseCategory{
-    Test
+    CHEST,
+    BACK,
+    LEGS,
+    CALVES,
+    SHOULDERS,
+    BICEPS,
+    TRICEPS,
+    ABS
 }
 
 @Entity
