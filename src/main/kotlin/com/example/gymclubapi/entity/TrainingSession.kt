@@ -5,8 +5,7 @@ import jakarta.persistence.*
 @Entity
 class TrainingSession(
     @ManyToOne(targetEntity = User::class)
-    val creator: User
-) : BaseEntity() {
-    @OneToMany(targetEntity = Workout::class)
-    val workouts: MutableList<Workout> = mutableListOf()
-}
+    val creator: User,
+    @ManyToOne(targetEntity = Workout::class)
+    val workout: Workout
+) : BaseEntity()

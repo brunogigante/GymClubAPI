@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("exercises")
-class ExerciseController(private val exerciseService: ExerciseService) {
+class ExerciseController(
+    private val exerciseService: ExerciseService
+) {
     @GetMapping
     fun findAll(@PageableDefault page: Pageable): Page<Exercise> {
         return exerciseService.getExercises(page)
@@ -25,7 +27,10 @@ class ExerciseController(private val exerciseService: ExerciseService) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody exerciseCreationDto: ExerciseCreationDto): Long? {
-        return exerciseService.addExercise(exerciseCreationDto)
+        val exerciseName = exerciseCreationDto.name
+        val exerciseCategory = exerciseCreationDto.category
+        val exerciseDescription = exerciseCreationDto.description
+        return exerciseService.addExercise(exerciseName, exerciseDescription, exerciseCategory)
     }
 
     @GetMapping("categories")

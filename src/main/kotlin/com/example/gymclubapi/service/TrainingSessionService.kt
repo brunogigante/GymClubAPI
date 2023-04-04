@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component
 @Component
 class TrainingSessionService(
     private val trainingSessionRepository: TrainingSessionRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val workoutService: WorkoutService
 ) {
     fun getTrainingSessions(page: Pageable): Page<TrainingSession> = trainingSessionRepository.findAll(page)
 
@@ -24,9 +25,10 @@ class TrainingSessionService(
         ResourceNotFoundException("User with id $id doesn't exist!")
     }
 
-    fun addTrainingSession(id: Long): Long? {
-        val creator = getCreator(id)
-        val trainingSession = TrainingSession(creator)
+    fun addTrainingSession(creatorId: Long, workoutId: Long): Long? {
+        val creator = getCreator(creatorId)
+        val workout = workoutService.getWorkout(workoutId)
+        val trainingSession = TrainingSession(creator, workout)
         return trainingSessionRepository.save(trainingSession).id
     }
 }
