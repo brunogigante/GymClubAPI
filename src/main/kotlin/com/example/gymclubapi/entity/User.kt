@@ -6,8 +6,8 @@ import jakarta.persistence.Entity
 
 @Entity(name = "users")
 class User(
-    @Column val firstName: String,
-    @Column val lastName: String,
-    @Column val email: String,
-    @Column val password: String
+    @Column val firstName: String? = null,
+    @Column val lastName: String? = null,
+    @Column val email: String? = null,
+    @Column val password: String? = null
 ) : BaseEntity()
