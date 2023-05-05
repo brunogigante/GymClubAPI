@@ -100,7 +100,7 @@ class TrainingPlanController(
     }
 
     @PostMapping("/workouts/{workoutId}/exercises/{exerciseId}/sets")
-    @ResponseStatus
+    @ResponseStatus(HttpStatus.CREATED)
     fun createWorkoutExerciseSet(
         @PathVariable workoutId: Long,
         @PathVariable exerciseId: Long,

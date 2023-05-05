@@ -17,7 +17,7 @@ class WorkoutExerciseSetService(
         return workoutExerciseSetRepository.findAll(page)
     }
 
-    fun getSet(setId: Long): WorkoutExerciseSet? = workoutExerciseSetRepository.findById(setId).orElseThrow {
+    fun getSet(setId: Long): WorkoutExerciseSet = workoutExerciseSetRepository.findById(setId).orElseThrow {
         ResourceNotFoundException("Workout exercise set with id $setId doesn't exist!")
     }
 

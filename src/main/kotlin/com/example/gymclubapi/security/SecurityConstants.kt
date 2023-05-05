@@ -2,7 +2,6 @@ package com.example.gymclubapi.security
 
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys.secretKeyFor
-import java.security.Key
 import javax.crypto.SecretKey
 
 

@@ -36,7 +36,7 @@ class AuthController(
             val token = jwtGenerator.generateToken(authentication)
             ResponseEntity(AuthResponseDto(token), HttpStatus.OK)
         } catch (err: Exception) {
-            null
+            ResponseEntity(HttpStatus.FORBIDDEN)
         }
     }
 
