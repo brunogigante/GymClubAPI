@@ -23,8 +23,8 @@ class TrainingSessionController(private val trainingSessionService: TrainingSess
 
     @PostMapping("/{workoutId}")
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@PathVariable workoutId: Long, @RequestBody trainingSessionCreatorDto: TrainingSessionCreatorDto): Long? {
-        return trainingSessionService.addTrainingSession(trainingSessionCreatorDto.creatorId, workoutId)
+    fun create(@PathVariable workoutId: Long): Long? {
+        return trainingSessionService.addTrainingSession(workoutId)
     }
 
     @PostMapping("/{sessionId}/set")

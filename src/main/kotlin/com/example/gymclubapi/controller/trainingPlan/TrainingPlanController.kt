@@ -111,4 +111,3 @@ class TrainingPlanController(
         return workoutExerciseSetService.createSet(workoutId, exerciseId, repetitions, weight)
     }
 }
-

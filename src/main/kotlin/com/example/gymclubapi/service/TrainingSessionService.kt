@@ -26,12 +26,9 @@ class TrainingSessionService(
         ResourceNotFoundException("Training session with id $id doesn't exist!")
     }
 
-    fun getCreator(id: Long): User = userRepository.findById(id).orElseThrow {
-        ResourceNotFoundException("User with id $id doesn't exist!")
-    }
-
-    fun addTrainingSession(creatorId: Long, workoutId: Long): Long? {
-        val creator = getCreator(creatorId)
+    fun addTrainingSession(workoutId: Long): Long? {
+        val creatorEmail = SecurityContextHolder.getContext().authentication.name
+        val creator = userRepository.findUserByEmail(creatorEmail)
         val workout = workoutService.getWorkout(workoutId)
         val trainingSession = TrainingSession(creator, workout)
         return trainingSessionRepository.save(trainingSession).id
