@@ -5,7 +5,8 @@ import jakarta.persistence.*
 @Entity
 class TrainingPlan(
     @Column val name: String,
-    @Column val isPublic: Boolean,
+    @Column val isPublic: Boolean
+) : BaseEntity() {
     @ManyToOne(targetEntity = TrainingPlan::class)
-    val parent: TrainingPlan?
-) : BaseEntity()
+    val parent: TrainingPlan? = null
+}

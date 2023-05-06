@@ -21,13 +21,17 @@ class TrainingPlanService(
         ResourceNotFoundException("Training plan with id $id doesn't exist!")
     }
 
-    fun addTrainingPlan(trainingPlanName: String, trainingPlanIsPublic: Boolean, trainingPlanParentId: Long?): Long? {
-        val trainingPlanReference = trainingPlanParentId?.let { getTrainingPlan(it) }
-        val trainingPlan = TrainingPlan(trainingPlanName, trainingPlanIsPublic, trainingPlanReference)
+    fun addTrainingPlan(trainingPlanName: String, trainingPlanIsPublic: Boolean): Long? {
+        val trainingPlan = TrainingPlan(trainingPlanName, trainingPlanIsPublic)
         val trainingPlanById = trainingPlan.id?.let { getTrainingPlan(it) }
         if (trainingPlanById != null)
             throw IllegalStateException("Training plan with id ${trainingPlan.id} already exists!")
         return trainingPlanRepository.save(trainingPlan).id
+    }
+
+    fun cloneTrainingPlan(parentPlanId: Long): Long?{
+        val parentPlan = getTrainingPlan(parentPlanId)
+        return 1
     }
 
     fun addWorkoutToPlan(trainingPlanId: Long, workoutName: String): Long? {

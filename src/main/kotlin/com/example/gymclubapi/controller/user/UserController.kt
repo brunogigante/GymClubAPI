@@ -26,4 +26,9 @@ class UserController(private val userService: UserService) {
     fun findById(@PathVariable id: Long): User? {
         return userService.getUser(id)
     }
+
+    @GetMapping("/authenticated")
+    fun findAuthenticated(): User {
+        return userService.getLoggedUser()
+    }
 }

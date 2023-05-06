@@ -40,8 +40,14 @@ class TrainingPlanController(
     fun create(@RequestBody trainingPlanDto: TrainingPlanDto): Long? {
         val trainingPlanName = trainingPlanDto.name
         val trainingPlanIsPublic = trainingPlanDto.isPublic
-        val trainingPlanParentId = trainingPlanDto.trainingPlanId
-        return trainingPlanService.addTrainingPlan(trainingPlanName, trainingPlanIsPublic, trainingPlanParentId)
+        return trainingPlanService.addTrainingPlan(trainingPlanName, trainingPlanIsPublic)
+    }
+
+    @PostMapping("/clone")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun create(@RequestBody trainingPlanCloneDto: TrainingPlanCloneDto): Long? {
+        val parentTrainingPlan = trainingPlanCloneDto.parentPlanId
+        return trainingPlanService.cloneTrainingPlan(parentTrainingPlan)
     }
 
     @GetMapping("/workouts")
