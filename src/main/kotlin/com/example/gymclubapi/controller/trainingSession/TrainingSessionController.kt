@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("sessions")
 class TrainingSessionController(private val trainingSessionService: TrainingSessionService){
     @GetMapping
-    fun findAll(page: Pageable): Page<TrainingSession>{
-        return trainingSessionService.getTrainingSessions(page)
+    fun findAll(): List<TrainingSession>{
+        return trainingSessionService.getTrainingSessions()
     }
 
     @GetMapping("/{id}")

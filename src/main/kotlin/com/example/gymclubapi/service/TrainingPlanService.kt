@@ -16,7 +16,7 @@ class TrainingPlanService(
     val workoutRepository: WorkoutRepository,
 ) {
 
-    fun getTrainingPlans(pageable: Pageable): Page<TrainingPlan> = trainingPlanRepository.findAll(pageable)
+    fun getTrainingPlans(): List<TrainingPlan> = trainingPlanRepository.findAll()
 
     fun getTrainingPlan(id: Long): TrainingPlan = trainingPlanRepository.findById(id).orElseThrow {
         ResourceNotFoundException("Training plan with id $id doesn't exist!")

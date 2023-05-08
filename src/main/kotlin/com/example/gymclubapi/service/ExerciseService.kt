@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class ExerciseService(private val exerciseRepository: ExerciseRepository){
-    fun getExercises(pageable: Pageable): Page<Exercise> = exerciseRepository.findAll(pageable)
+    fun getExercises(): List<Exercise> = exerciseRepository.findAll()
 
     fun getExercise(id: Long): Exercise = exerciseRepository.findById(id).orElseThrow {
         ResourceNotFoundException("Exercise with id $id not found")

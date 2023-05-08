@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 @Component
 class UserService(private val userRepository: UserRepository) {
 
-    fun getUsers(pageable: Pageable): Page<User> = userRepository.findAll(pageable)
+    fun getUsers(): List<User> = userRepository.findAll()
 
     fun getUser(id: Long): User? = userRepository.findById(id).orElseThrow{
         ResourceNotFoundException("User with id $id not found")

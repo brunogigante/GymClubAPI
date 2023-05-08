@@ -13,8 +13,8 @@ class WorkoutExerciseSetService(
     private val workoutExerciseService: WorkoutExerciseService
 ) {
 
-    fun getSets(page: Pageable): Page<WorkoutExerciseSet> {
-        return workoutExerciseSetRepository.findAll(page)
+    fun getSets(): List<WorkoutExerciseSet> {
+        return workoutExerciseSetRepository.findAll()
     }
 
     fun getSet(setId: Long): WorkoutExerciseSet = workoutExerciseSetRepository.findById(setId).orElseThrow {

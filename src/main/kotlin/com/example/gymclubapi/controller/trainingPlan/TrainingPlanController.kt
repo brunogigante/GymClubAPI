@@ -26,8 +26,8 @@ class TrainingPlanController(
     val workoutExerciseSetService: WorkoutExerciseSetService
 ) {
     @GetMapping
-    fun findAll(@PageableDefault page: Pageable): Page<TrainingPlan> {
-        return trainingPlanService.getTrainingPlans(page)
+    fun findAll(): List<TrainingPlan> {
+        return trainingPlanService.getTrainingPlans()
     }
 
     @GetMapping("/{id}")
@@ -51,8 +51,8 @@ class TrainingPlanController(
     }
 
     @GetMapping("/workouts")
-    fun findAllWorkouts(@PageableDefault page: Pageable): Page<Workout> {
-        return workoutService.getWorkouts(page)
+    fun findAllWorkouts(): List<Workout> {
+        return workoutService.getWorkouts()
     }
 
     @GetMapping("{id}/workouts")
@@ -93,8 +93,8 @@ class TrainingPlanController(
     }
 
     @GetMapping("/workouts/exercises/sets")
-    fun findAllSets(@PageableDefault page: Pageable): Page<WorkoutExerciseSet> {
-        return workoutExerciseSetService.getSets(page)
+    fun findAllSets(): List<WorkoutExerciseSet> {
+        return workoutExerciseSetService.getSets()
     }
 
     @GetMapping("/workouts/{workoutId}/exercises/{exerciseId}/sets")

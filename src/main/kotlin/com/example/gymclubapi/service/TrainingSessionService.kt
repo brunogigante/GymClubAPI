@@ -20,7 +20,7 @@ class TrainingSessionService(
     private val workoutService: WorkoutService,
     private val workoutExerciseSetService: WorkoutExerciseSetService
 ) {
-    fun getTrainingSessions(page: Pageable): Page<TrainingSession> = trainingSessionRepository.findAll(page)
+    fun getTrainingSessions(): List<TrainingSession> = trainingSessionRepository.findAll()
 
     fun getTrainingSession(id: Long): TrainingSession = trainingSessionRepository.findById(id).orElseThrow {
         ResourceNotFoundException("Training session with id $id doesn't exist!")

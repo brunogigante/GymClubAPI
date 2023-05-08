@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("users")
 class UserController(private val userService: UserService) {
     @GetMapping
-    fun findAll(@PageableDefault page: Pageable): Page<User> {
-        return userService.getUsers(page)
+    fun findAll(): List<User> {
+        return userService.getUsers()
     }
 
     @GetMapping("/{id}")

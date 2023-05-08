@@ -15,8 +15,8 @@ class ExerciseController(
     private val exerciseService: ExerciseService
 ) {
     @GetMapping
-    fun findAll(@PageableDefault page: Pageable): Page<Exercise> {
-        return exerciseService.getExercises(page)
+    fun findAll(): List<Exercise> {
+        return exerciseService.getExercises()
     }
 
     @GetMapping("/{id}")
