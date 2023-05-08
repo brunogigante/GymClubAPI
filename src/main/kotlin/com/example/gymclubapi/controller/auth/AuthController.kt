@@ -47,11 +47,11 @@ class AuthController(
         val email = registerDto.email
         val password = registerDto.password
         if (userRepository.existsUserByEmail(email)) {
-            throw IllegalStateException("Email ${email} is already taken!")
+            return ResponseEntity(HttpStatus.BAD_REQUEST)
         }
         val user = User(firstName, lastName, email, passwordEncoder.encode(password))
         userRepository.save(user)
-        return ResponseEntity("User registered successefully!", HttpStatus.OK)
+        return ResponseEntity(HttpStatus.OK)
     }
 
 
