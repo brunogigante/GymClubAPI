@@ -37,7 +37,7 @@ class TrainingPlanController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody trainingPlanDto: TrainingPlanDto): Long? {
+    fun clonePlan(@RequestBody trainingPlanDto: TrainingPlanDto): Long? {
         val trainingPlanName = trainingPlanDto.name
         val trainingPlanIsPublic = trainingPlanDto.isPublic
         return trainingPlanService.addTrainingPlan(trainingPlanName, trainingPlanIsPublic)
@@ -45,7 +45,7 @@ class TrainingPlanController(
 
     @PostMapping("/clone")
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody trainingPlanCloneDto: TrainingPlanCloneDto): Long? {
+    fun createPlan(@RequestBody trainingPlanCloneDto: TrainingPlanCloneDto): Long? {
         val parentTrainingPlan = trainingPlanCloneDto.parentPlanId
         return trainingPlanService.cloneTrainingPlan(parentTrainingPlan)
     }
@@ -115,5 +115,15 @@ class TrainingPlanController(
         val repetitions = workoutExerciseSetDto.repetitions
         val weight = workoutExerciseSetDto.weight
         return workoutExerciseSetService.createSet(workoutId, exerciseId, repetitions, weight)
+    }
+
+    @DeleteMapping("/{id}")
+    fun deletePlan(@PathVariable id: Long){
+        return trainingPlanService.deletePlan(id)
+    }
+
+    @PutMapping("/{id}")
+    fun updatePlan(@PathVariable id: Long, @RequestBody trainingPlanUpdateDto: TrainingPlanUpdateDto){
+        return trainingPlanService.updatePlan(id, trainingPlanUpdateDto)
     }
 }

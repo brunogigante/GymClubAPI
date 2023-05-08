@@ -1,5 +1,6 @@
 package com.example.gymclubapi.service
 
+import com.example.gymclubapi.controller.trainingPlan.TrainingPlanUpdateDto
 import com.example.gymclubapi.entity.TrainingPlan
 import com.example.gymclubapi.entity.Workout
 import com.example.gymclubapi.exceptions.ResourceNotFoundException
@@ -41,5 +42,18 @@ class TrainingPlanService(
         if (workoutByName != null)
             throw IllegalStateException("Workout with name ${workout.name} already exists!")
         return workoutRepository.save(workout).id
+    }
+
+    fun deletePlan(trainingPlanId: Long) {
+        val plan = getTrainingPlan(trainingPlanId)
+        return trainingPlanRepository.delete(plan)
+    }
+
+    fun updatePlan(trainingPlanId: Long, trainingPlanUpdateDto: TrainingPlanUpdateDto){
+        getTrainingPlan(trainingPlanId).let { plan ->
+            trainingPlanUpdateDto.name?.let { plan.name = it }
+            trainingPlanUpdateDto.isPublic?.let { plan.isPublic = it }
+            trainingPlanRepository.save(plan)
+        }
     }
 }
