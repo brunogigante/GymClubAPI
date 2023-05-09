@@ -41,9 +41,9 @@ class TrainingPlanService(
         return 1
     }
 
-    fun addWorkoutToPlan(trainingPlanId: Long, workoutName: String): Long? {
+    fun addWorkoutToPlan(trainingPlanId: Long, workoutName: String, workoutDescription: String): Long? {
         val plan = getTrainingPlan(trainingPlanId)
-        val workout = Workout(workoutName, plan)
+        val workout = Workout(workoutName,workoutDescription, plan)
         val workoutByName = workoutRepository.findWorkoutByName(workout.name)
         if (workoutByName != null)
             throw IllegalStateException("Workout with name ${workout.name} already exists!")

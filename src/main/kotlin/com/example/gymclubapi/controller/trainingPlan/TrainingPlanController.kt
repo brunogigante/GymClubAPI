@@ -69,7 +69,8 @@ class TrainingPlanController(
     @ResponseStatus(HttpStatus.CREATED)
     fun createWorkout(@PathVariable id: Long, @RequestBody workoutCreationDto: WorkoutCreationDto): Long? {
         val workoutName = workoutCreationDto.name
-        return trainingPlanService.addWorkoutToPlan(id, workoutName)
+        val workoutDescription = workoutCreationDto.description
+        return trainingPlanService.addWorkoutToPlan(id, workoutName, workoutDescription)
     }
 
     @PostMapping("/workouts/{workoutId}/exercises")
