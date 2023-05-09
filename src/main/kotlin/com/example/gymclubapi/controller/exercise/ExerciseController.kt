@@ -3,9 +3,6 @@ package com.example.gymclubapi.controller.exercise
 import com.example.gymclubapi.entity.Exercise
 import com.example.gymclubapi.entity.ExerciseCategory
 import com.example.gymclubapi.service.ExerciseService
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
-import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -32,7 +29,6 @@ class ExerciseController(
         val exerciseDescription = exerciseCreationDto.description
         return exerciseService.addExercise(exerciseName, exerciseDescription, exerciseCategory)
     }
-
 
     @GetMapping("categories")
     fun findAllCategories(): List<ExerciseCategory> = exerciseService.getExercisesCategories()

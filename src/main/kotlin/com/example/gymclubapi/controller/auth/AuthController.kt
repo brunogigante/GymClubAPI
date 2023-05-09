@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.lang.Error
 import java.lang.Exception
 
 @RestController
@@ -53,6 +52,4 @@ class AuthController(
         userRepository.save(user)
         return ResponseEntity(HttpStatus.OK)
     }
-
-
 }

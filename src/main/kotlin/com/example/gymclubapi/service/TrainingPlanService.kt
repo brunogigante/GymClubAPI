@@ -27,6 +27,9 @@ class TrainingPlanService(
 
     fun addTrainingPlan(trainingPlanName: String, trainingPlanIsPublic: Boolean): Long? {
         val trainingPlan = TrainingPlan(trainingPlanName, trainingPlanIsPublic)
+        val userEmail = SecurityContextHolder.getContext().authentication.name
+        val user = userRepository.findUserByEmail(userEmail)
+        trainingPlan.creator = user
         val trainingPlanById = trainingPlan.id?.let { getTrainingPlan(it) }
         if (trainingPlanById != null)
             throw IllegalStateException("Training plan with id ${trainingPlan.id} already exists!")
@@ -58,5 +61,11 @@ class TrainingPlanService(
             trainingPlanUpdateDto.isPublic?.let { plan.isPublic = it }
             trainingPlanRepository.save(plan)
         }
+    }
+
+    fun getUserTrainingPlans(): List<TrainingPlan>{
+        val userEmail = SecurityContextHolder.getContext().authentication.name
+        val user = userRepository.findUserByEmail(userEmail)
+        return trainingPlanRepository.findTrainingPlanByCreator(user)
     }
 }

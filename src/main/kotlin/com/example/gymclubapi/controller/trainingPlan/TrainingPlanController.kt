@@ -126,4 +126,9 @@ class TrainingPlanController(
     fun updatePlan(@PathVariable id: Long, @RequestBody trainingPlanUpdateDto: TrainingPlanUpdateDto){
         return trainingPlanService.updatePlan(id, trainingPlanUpdateDto)
     }
+
+    @GetMapping("/me")
+    fun findUserPlans(): List<TrainingPlan>{
+        return trainingPlanService.getUserTrainingPlans()
+    }
 }
