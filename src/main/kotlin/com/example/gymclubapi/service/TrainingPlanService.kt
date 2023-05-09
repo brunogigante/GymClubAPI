@@ -5,15 +5,18 @@ import com.example.gymclubapi.entity.TrainingPlan
 import com.example.gymclubapi.entity.Workout
 import com.example.gymclubapi.exceptions.ResourceNotFoundException
 import com.example.gymclubapi.repository.TrainingPlanRepository
+import com.example.gymclubapi.repository.UserRepository
 import com.example.gymclubapi.repository.WorkoutRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 
 @Component
 class TrainingPlanService(
     val trainingPlanRepository: TrainingPlanRepository,
     val workoutRepository: WorkoutRepository,
+    val userRepository: UserRepository
 ) {
 
     fun getTrainingPlans(): List<TrainingPlan> = trainingPlanRepository.findAll()

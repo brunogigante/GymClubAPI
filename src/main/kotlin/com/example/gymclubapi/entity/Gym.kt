@@ -6,6 +6,7 @@ import jakarta.persistence.Entity
 @Entity
 class Gym(
     @Column val name: String,
-    @Column val coordinates: Pair<Float, Float>
+    @Column val latitude: Float,
+    @Column val longitude: Float
 ) : BaseEntity() {
 }

@@ -45,4 +45,10 @@ class TrainingSessionService(
         val trainingSessionSet = TrainingSessionSet(repetitions, weight, trainingSession, workoutExerciseSet)
         return trainingSessionSetRepository.save(trainingSessionSet).sessionSet.id
     }
+
+    fun getUserTrainingSessions(): List<TrainingSession>{
+        val userEmail = SecurityContextHolder.getContext().authentication.name
+        val user = userRepository.findUserByEmail(userEmail)
+        return trainingSessionRepository.findTrainingSessionByCreator(user)
+    }
 }

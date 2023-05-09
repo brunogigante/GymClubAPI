@@ -35,4 +35,9 @@ class TrainingSessionController(private val trainingSessionService: TrainingSess
         val workoutExerciseId = trainingSessionSetDto.workoutExerciseSetId
         return trainingSessionService.addTrainingSessionSet(repetitions, weight, sessionId, workoutExerciseId)
     }
+
+    @GetMapping("/me")
+    fun findUserSessions(): List<TrainingSession>{
+        return trainingSessionService.getUserTrainingSessions()
+    }
 }

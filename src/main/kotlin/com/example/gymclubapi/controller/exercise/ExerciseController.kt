@@ -33,6 +33,7 @@ class ExerciseController(
         return exerciseService.addExercise(exerciseName, exerciseDescription, exerciseCategory)
     }
 
+
     @GetMapping("categories")
     fun findAllCategories(): List<ExerciseCategory> = exerciseService.getExercisesCategories()
 }

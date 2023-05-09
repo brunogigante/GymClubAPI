@@ -1,6 +1,7 @@
 package com.example.gymclubapi.repository
 
 import com.example.gymclubapi.entity.TrainingSession
+import com.example.gymclubapi.entity.User
 import org.springframework.data.domain.Example
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.query.FluentQuery
@@ -9,5 +10,5 @@ import java.util.function.Function
 
 @Repository
 interface TrainingSessionRepository: JpaRepository<TrainingSession, Long> {
-
+    fun findTrainingSessionByCreator(creator: User): List<TrainingSession>
 }
