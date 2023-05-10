@@ -10,5 +10,6 @@ class TrainingPlan(
     @ManyToOne(targetEntity = User::class)
     var creator: User? = null
     @ManyToOne(targetEntity = TrainingPlan::class)
-    val parent: TrainingPlan? = null
+    var parent: TrainingPlan? = null
+    @Column var enabled: Boolean = true
 }

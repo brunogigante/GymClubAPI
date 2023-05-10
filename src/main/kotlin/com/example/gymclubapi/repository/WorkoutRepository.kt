@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 interface WorkoutRepository : JpaRepository<Workout, Long> {
     fun findWorkoutByName(name: String): Workout?
     fun findWorkoutByPlanId(id: Long): MutableList<Workout>
+    fun findWorkoutById(id: Long): Workout
 }

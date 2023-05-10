@@ -14,7 +14,15 @@ class WorkoutService(
     private val trainingPlanRepository: TrainingPlanRepository
 ) {
 
-    fun getWorkouts(): List<Workout> = workoutRepository.findAll()
+    fun getWorkouts(): List<Workout>{
+        val workouts: MutableList<Workout> = workoutRepository.findAll()
+        workouts.forEach {
+            if(!it.plan.enabled){
+                workouts.remove(it)
+            }
+        }
+        return workouts
+    }
 
     fun getWorkout(id: Long): Workout = workoutRepository.findById(id).orElseThrow {
         ResourceNotFoundException("Workout with id $id doesn't exist!")

@@ -11,9 +11,6 @@ import com.example.gymclubapi.service.TrainingPlanService
 import com.example.gymclubapi.service.WorkoutExerciseService
 import com.example.gymclubapi.service.WorkoutExerciseSetService
 import com.example.gymclubapi.service.WorkoutService
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
-import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -37,7 +34,7 @@ class TrainingPlanController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun clonePlan(@RequestBody trainingPlanDto: TrainingPlanDto): Long? {
+    fun createPlan(@RequestBody trainingPlanDto: TrainingPlanDto): Long? {
         val trainingPlanName = trainingPlanDto.name
         val trainingPlanIsPublic = trainingPlanDto.isPublic
         return trainingPlanService.addTrainingPlan(trainingPlanName, trainingPlanIsPublic)
@@ -45,7 +42,7 @@ class TrainingPlanController(
 
     @PostMapping("/clone")
     @ResponseStatus(HttpStatus.CREATED)
-    fun createPlan(@RequestBody trainingPlanCloneDto: TrainingPlanCloneDto): Long? {
+    fun clonePlan(@RequestBody trainingPlanCloneDto: TrainingPlanCloneDto): Long? {
         val parentTrainingPlan = trainingPlanCloneDto.parentPlanId
         return trainingPlanService.cloneTrainingPlan(parentTrainingPlan)
     }
@@ -131,5 +128,10 @@ class TrainingPlanController(
     @GetMapping("/me")
     fun findUserPlans(): List<TrainingPlan>{
         return trainingPlanService.getUserTrainingPlans()
+    }
+
+    @GetMapping("/public")
+    fun findPublicPlans(): List<TrainingPlan>{
+        return trainingPlanService.getPublicPlans()
     }
 }

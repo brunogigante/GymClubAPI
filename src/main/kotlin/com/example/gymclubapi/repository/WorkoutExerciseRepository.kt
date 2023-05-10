@@ -14,4 +14,5 @@ interface WorkoutExerciseRepository: JpaRepository<WorkoutExercise, WorkoutExerc
     @Query("SELECT we.exercise FROM WorkoutExercise we WHERE we.workout = :workout")
     fun findExercisesByWorkout(@Param("workout") workout: Workout): MutableList<Exercise>
     fun findWorkoutExerciseByWorkoutAndExercise(workout: Workout, exercise: Exercise): WorkoutExercise?
+    fun findWorkoutExerciseByWorkout(workout: Workout): List<WorkoutExercise>
 }
