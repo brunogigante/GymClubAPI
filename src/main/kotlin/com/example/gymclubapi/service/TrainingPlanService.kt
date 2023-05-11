@@ -48,7 +48,6 @@ class TrainingPlanService(
         }
         val parentWorkouts = workoutRepository.findWorkoutByPlanId(parentPlanId)
         val workouts = mutableMapOf<Long, Long>()
-        val exercises = mutableMapOf<Long, Long>()
         var parentExercises: MutableList<Exercise>
         val parentWorkoutExercises = mutableListOf<WorkoutExercise>()
         parentWorkouts.forEach { workoutIt ->
@@ -64,16 +63,6 @@ class TrainingPlanService(
             }
             parentExercises = workoutExerciseRepository.findExercisesByWorkout(workoutIt)
             parentExercises.forEach { exerciseIt ->
-                exerciseIt.id?.let {
-                    if (newPlan != null) {
-                        cloneObject(exerciseIt, newPlan)?.let { exerciseItId ->
-                            exercises.put(
-                                it,
-                                exerciseItId
-                            )
-                        }
-                    }
-                }
                 workoutExerciseRepository.findWorkoutExerciseByWorkoutAndExercise(workoutIt, exerciseIt)?.let {
                     parentWorkoutExercises.add(
                         it
@@ -81,22 +70,14 @@ class TrainingPlanService(
                 }
                 parentWorkoutExercises.forEach { workoutExerciseIt ->
 
-                    if (workouts.containsKey(workoutExerciseIt.workout.id) && exercises.containsKey(workoutExerciseIt.exercise.id)
-                    ) {
+                    if (workouts.containsKey(workoutExerciseIt.workout.id)) {
                         val findWorkoutById = workouts[workoutExerciseIt.workout.id]?.let {
                             workoutRepository.findWorkoutById(
                                 it
                             )
                         }
-                        val findExerciseById = exercises[workoutExerciseIt.exercise.id]?.let {
-                            exerciseRepository.findExerciseById(
-                                it
-                            )
-                        }
                         if (findWorkoutById != null) {
-                            if (findExerciseById != null) {
-                                cloneObject(WorkoutExercise(findWorkoutById, findExerciseById), parentPlan)
-                            }
+                            cloneObject(WorkoutExercise(findWorkoutById, exerciseIt), parentPlan)
                         }
                     }
                 }
@@ -110,11 +91,6 @@ class TrainingPlanService(
             is Workout -> {
                 val workout = Workout(instance.name, instance.description, parentPlan)
                 return workout.let { workoutRepository.save(it).id }
-            }
-
-            is Exercise -> {
-                val exercise = Exercise(instance.name, instance.description, instance.category)
-                return exerciseRepository.save(exercise).id
             }
 
             is WorkoutExercise -> {
