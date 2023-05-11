@@ -5,7 +5,8 @@ import jakarta.persistence.*
 @Entity
 class TrainingPlan(
     @Column var name: String,
-    @Column var isPublic: Boolean
+    @Column var isPublic: Boolean,
+    @Column var description: String
 ) : BaseEntity() {
     @ManyToOne(targetEntity = User::class)
     var creator: User? = null

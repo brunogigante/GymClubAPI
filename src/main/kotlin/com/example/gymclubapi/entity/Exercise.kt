@@ -18,5 +18,7 @@ enum class ExerciseCategory{
 class Exercise(
     @Column val name: String,
     @Column val description: String,
-    @Column val category: ExerciseCategory
+    @Column val category: ExerciseCategory,
+    @Column val repetitions: Int,
+    @Column val weight: Int
 ) : BaseEntity()

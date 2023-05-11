@@ -25,8 +25,8 @@ class TrainingPlanService(
         ResourceNotFoundException("Training plan with id $id doesn't exist!")
     }
 
-    fun addTrainingPlan(trainingPlanName: String, trainingPlanIsPublic: Boolean): Long? {
-        val trainingPlan = TrainingPlan(trainingPlanName, trainingPlanIsPublic)
+    fun addTrainingPlan(trainingPlanName: String, trainingPlanIsPublic: Boolean, trainingPlanDescription: String): Long? {
+        val trainingPlan = TrainingPlan(trainingPlanName, trainingPlanIsPublic, trainingPlanDescription)
         val userEmail = SecurityContextHolder.getContext().authentication.name
         val user = userRepository.findUserByEmail(userEmail)
         trainingPlan.creator = user
@@ -99,7 +99,7 @@ class TrainingPlanService(
             }
 
             is TrainingPlan -> {
-                val trainingPlan = TrainingPlan(instance.name, false)
+                val trainingPlan = TrainingPlan(instance.name, false, instance.description)
                 trainingPlan.parent = parentPlan
                 return trainingPlanRepository.save(trainingPlan).id
             }

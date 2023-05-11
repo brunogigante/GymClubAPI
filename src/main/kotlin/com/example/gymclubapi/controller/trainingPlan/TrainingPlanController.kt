@@ -37,7 +37,8 @@ class TrainingPlanController(
     fun createPlan(@RequestBody trainingPlanDto: TrainingPlanDto): Long? {
         val trainingPlanName = trainingPlanDto.name
         val trainingPlanIsPublic = trainingPlanDto.isPublic
-        return trainingPlanService.addTrainingPlan(trainingPlanName, trainingPlanIsPublic)
+        val trainingPlanDescription = trainingPlanDto.description
+        return trainingPlanService.addTrainingPlan(trainingPlanName, trainingPlanIsPublic, trainingPlanDescription)
     }
 
     @PostMapping("/clone")

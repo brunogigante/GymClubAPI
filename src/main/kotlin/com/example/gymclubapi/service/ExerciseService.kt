@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class ExerciseService(
-    private val exerciseRepository: ExerciseRepository){
+    private val exerciseRepository: ExerciseRepository
+) {
     fun getExercises(): List<Exercise> = exerciseRepository.findAll()
 
     fun getExercise(id: Long): Exercise = exerciseRepository.findById(id).orElseThrow {
@@ -21,8 +22,13 @@ class ExerciseService(
 
     fun getExercisesCategories(): List<ExerciseCategory> = ExerciseCategory.values().asList()
 
-    fun addExercise(exerciseName: String, exerciseDescription: String, exerciseCategory: ExerciseCategory): Long? {
-        val exercise = Exercise(exerciseName, exerciseDescription, exerciseCategory)
+    fun addExercise(
+        exerciseName: String, exerciseDescription: String,
+        exerciseCategory: ExerciseCategory, exerciseRepetitions: Int,
+        exerciseWeight: Int
+    ): Long? {
+        val exercise =
+            Exercise(exerciseName, exerciseDescription, exerciseCategory, exerciseRepetitions, exerciseWeight)
         val exerciseByName = exerciseRepository.findExerciseByName(exercise.name)
         if (exerciseByName != null) {
             throw IllegalStateException("Exercised named ${exercise.name} already exists!")

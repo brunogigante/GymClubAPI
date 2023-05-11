@@ -5,5 +5,7 @@ import com.example.gymclubapi.entity.ExerciseCategory
 data class ExerciseCreationDto(
     val name: String,
     val description: String,
-    val category: ExerciseCategory
+    val category: ExerciseCategory,
+    val repetitions: Int,
+    val weight: Int
 )

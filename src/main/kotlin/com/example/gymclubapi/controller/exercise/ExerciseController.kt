@@ -27,7 +27,9 @@ class ExerciseController(
         val exerciseName = exerciseCreationDto.name
         val exerciseCategory = exerciseCreationDto.category
         val exerciseDescription = exerciseCreationDto.description
-        return exerciseService.addExercise(exerciseName, exerciseDescription, exerciseCategory)
+        val exerciseRepetitions = exerciseCreationDto.repetitions
+        val exerciseWeight = exerciseCreationDto.weight
+        return exerciseService.addExercise(exerciseName, exerciseDescription, exerciseCategory, exerciseRepetitions, exerciseWeight)
     }
 
     @GetMapping("categories")
