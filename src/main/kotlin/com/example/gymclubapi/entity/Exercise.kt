@@ -11,7 +11,8 @@ enum class ExerciseCategory{
     SHOULDERS,
     BICEPS,
     TRICEPS,
-    ABS
+    ABS,
+    DELTOIDS
 }
 
 @Entity
